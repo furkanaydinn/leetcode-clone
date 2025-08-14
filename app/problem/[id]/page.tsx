@@ -41,12 +41,11 @@ const getDifficultyColor = (difficulty: string) => {
 };
 
 // Sayfanın kendisi artık async olabilir ve sunucuda çalışır
-export default async function ProblemPage({ params }: { params: { id: string } }) {
+export default async function ProblemPage({ params: { id } }: { params: { id: string } }) {
   // `params` burada basit bir obje. Hiçbir uyarı veya hata yok.
-  const id = params.id;
+  
   const session = await getServerSession(); // Session'ı sunucuda alıyoruz
-
-  const problemId = Number.parseInt(id);
+  const problemId = Number.parseInt(id); // 'id'yi doğrudan kullanıyoruz
   const problem = problemData[problemId as keyof typeof problemData];
 
   if (!problem) {

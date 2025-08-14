@@ -36,7 +36,7 @@ export default function RegisterPage() {
     setIsLoading(true)
     setError("")
 
-    // BetterAuth default validation: min 8 chars, at least one letter and one number
+    // BetterAuth default validation: min 8 chars, at least 1 letter and 1 number
     if (password.length < 8) {
       setError("Password must be at least 8 characters")
       setIsLoading(false)
@@ -50,11 +50,11 @@ export default function RegisterPage() {
     }
 
     try {
-      const result = await signUp.email({ email, password, name: "" })
+      const result = await signUp.email({ email, password, name: "Mehmet" })
       
       if (result.error) {
         const error = result.error as any
-        setError(error.message || "Registration failed")
+        setError(error.message || result.error?.message || JSON.stringify(result.error) || "Registration failed")
       } else {
         router.push("/")
       }
@@ -120,4 +120,4 @@ export default function RegisterPage() {
       </Card>
     </div>
   )
-} 
+}
